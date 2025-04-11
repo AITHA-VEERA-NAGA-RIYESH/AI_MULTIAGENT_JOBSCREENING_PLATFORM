@@ -1,27 +1,40 @@
+import pandas as pd
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import os
 from dotenv import load_dotenv
+import random
+from datetime import datetime
 
 load_dotenv()
 sender_email = "meeturiajaykumar.23@gmail.com"
 sender_password = os.getenv("GOOGLE_APP_PASSWORD")
+try:
+    df = pd.read_csv('uploads/job_description.csv', encoding='utf-8')
+except UnicodeDecodeError:
+    df = pd.read_csv('uploads/job_description.csv', encoding='ISO-8859-1')
+job_title = df['Job Title'][0]
 
 def send_email_result(candidate_name, candidate_email, is_selected):
     if is_selected:
-        subject = "🎉 You're Selected - Congratulations!"
+        interview_date = datetime.today().strftime('%Y-%m-%d')
+        hour = random.randint(9, 16)
+        minute = random.choice([0, 15, 30, 45])
+        interview_time = f"{hour:02d}:{minute:02d}"
+        subject = f"Interview Invitation - {interview_date}"
         body = f"""
-Hi {candidate_name},
+Dear {candidate_name},
 
-We are pleased to inform you that you have been selected for the next steps in our hiring process!
+We are pleased to inform you that you have been shortlisted for the next phase of our recruitment process for the **{job_title}** position.
 
-Congratulations on making it this far. Our team was really impressed with your profile.
+Your in-person interview has been scheduled on {interview_date} at {interview_time} IST (24hrs) at our office. Please review the appointment details and confirm your availability at your earliest convenience. Should you have any questions or require further clarification, feel free to reach out.
 
-We will be sending more details shortly.
+We appreciate your interest in our organization and look forward to meeting you.
 
-Best Regards,\nThe Team
-        """
+Best Regards,
+The Hiring Team
+"""
     else:
         subject = "Update on Your Job Application"
         body = f"""

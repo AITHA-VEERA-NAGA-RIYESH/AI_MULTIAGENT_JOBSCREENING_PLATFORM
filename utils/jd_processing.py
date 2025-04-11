@@ -26,9 +26,15 @@ Return a concise summary.
 
 def save_job_description(job_title, job_description, file_path):
     new_data = pd.DataFrame({"Job Title": [job_title], "Job Description": [job_description]})
+    
     if os.path.exists(file_path):
-        existing = pd.read_csv(file_path, encoding="ISO-8859-1")
+        try:
+            existing = pd.read_csv(file_path, encoding="utf-8", on_bad_lines='skip')
+        except UnicodeDecodeError:
+            existing = pd.read_csv(file_path, encoding="ISO-8859-1", on_bad_lines='skip')
         df = pd.concat([existing, new_data], ignore_index=True)
     else:
         df = new_data
-    df.to_csv(file_path, index=False, encoding="ISO-8859-1")
+
+    # Change encoding to 'utf-8'
+    df.to_csv(file_path, index=False, encoding="utf-8")
