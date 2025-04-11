@@ -6,5 +6,4 @@ dotenv
 ipykernel
 sentence-transformers
 faiss-cpu
-json
 html
