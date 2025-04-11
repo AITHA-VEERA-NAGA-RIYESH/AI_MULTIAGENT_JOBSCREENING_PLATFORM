@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block title %}Screening Result{% endblock %}
+
+{% block content %}
+<div class="w-full max-w-3xl mx-auto mt-10 px-4">
+    <h2 class="text-center text-green-600 text-4xl font-bold mb-5">🧠 Screening Result</h2>
+
+    <div class="bg-white p-5 rounded-xl shadow-md space-y-6 border border-gray-200">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <p class="text-base text-gray-700"><span class="font-semibold text-gray-900">Candidate:</span> {{ name }}</p>
+            <p class="text-base text-gray-700"><span class="font-semibold text-gray-900">Role:</span> {{ role }}</p>
+        </div>
+
+        <div>
+            <div class="text-base font-semibold text-gray-800 mb-1">Decision:</div>
+            <div class="pl-1">
+                <div class="bg-gray-50 px-4 py-3 rounded-md border border-gray-200 text-gray-800 text-sm leading-relaxed whitespace-pre-wrap break-words">
+                    {{ eligibility }}
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="flex flex-col space-y-2">
+            <label class="text-base font-semibold text-gray-800">Email Status:</label>
+            <div class="bg-gray-50 px-4 py-3 rounded-md border border-gray-200 text-gray-800 text-sm leading-relaxed whitespace-pre-wrap break-words">
+                {{ email_status }}
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5 text-center">
+        <a href="{{ url_for('screening') }}" class="inline-block bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-5 rounded-md transition">
+            ← Back to Screening
+        </a>
+    </div>
+</div>
+{% endblock %}
