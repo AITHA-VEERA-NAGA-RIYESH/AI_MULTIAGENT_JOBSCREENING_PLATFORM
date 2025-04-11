@@ -1,0 +1,11 @@
+langchain-groq
+langchain
+streamlit
+langchain_community
+dotenv
+ipykernel
+sentence-transformers
+faiss-cpu
+email
+json
+html
