@@ -6,3 +6,4 @@ dotenv
 ipykernel
 sentence-transformers
 faiss-cpu
+flask
